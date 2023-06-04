@@ -16,6 +16,8 @@ Including another URLconf
 """
 
 from django.urls import path
+# from django_distill import distill_path
+
 from blog_app import views
 from django.contrib import admin
 
