@@ -1,0 +1,17 @@
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+
+
+{% block title %}Create New Post{% endblock %}
+
+{% block content %}
+    <h1>Create New Post</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="title">Title:</label><br>
+        <input type="text" name="title" required><br>
+        <label for="content">Content:</label><br>
+        <textarea name="content" required></textarea><br>
+        <button type="submit">Create</button>
+    </form>
+    <a href="{% url 'post_list' %}">Back to List</a>
+{% endblock %}

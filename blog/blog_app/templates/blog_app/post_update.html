@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Update Post{% endblock %}
+
+{% block content %}
+    <h1>Update Post</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="title">Title:</label><br>
+        <input type="text" name="title" value="{{ post.title }}" required><br>
+        <label for="content">Content:</label><br>
+        <textarea name="content" required>{{ post.content }}</textarea><br>
+        <button type="submit">Update</button>
+    </form>
+    <a href="{% url 'post_detail' post.pk %}">Back to Detail</a>
+{% endblock %}

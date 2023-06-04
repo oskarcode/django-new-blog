@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}My Blog{% endblock %}
+
+{% block content %}
+    <h1>My Blog</h1>
+    {% for post in posts %}
+        <div class="post-box">
+            <h2 class="post-title"><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+            <p class="post-content">{{ post.content | slice:': 50' }}</p>
+            <p class="post-metadata">Created at: {{ post.created_at }} | Updated at: {{ post.updated_at }}</p>
+        </div>
+    {% empty %}
+        <p>No posts yet.</p>
+    {% endfor %}
+{% endblock %}
