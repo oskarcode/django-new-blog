@@ -3,5 +3,98 @@
 
 Directories:
 
-Project: /home/ubuntu
-App:
+
+Project:/home/ubuntu/django-new-blog/
+
+App:/home/ubuntu/django-new-blog/blog
+
+Settings.py:/home/ubuntu/django-new-blog/blog/blog
+
+
+Venv: /home/ubuntu/newportfolio/portfolio_venv/bin
+
+
+
+Portfolio
+Socket:
+
+[Unit]
+
+Description=gunicorn socket
+
+[Socket]
+
+ListenStream=/run/portfolio.sock
+
+[Install]
+
+WantedBy=sockets.target
+
+
+
+Service:
+[Unit]
+
+Description=gunicorn daemon
+
+Requires=portfolio.socket
+
+After=network.target
+
+[Service]
+
+User=ubuntu
+
+Group=ubuntu
+
+WorkingDirectory=/home/ubuntu/portfolio
+
+ExecStart=/home/ubuntu/portfolio_env/bin/gunicorn --workers 3 --bind unix:/run/portfolio.sock portfolio.wsgi:application
+
+
+[Install]
+
+WantedBy=multi-user.target
+
+
+
+Blog:
+
+[Unit]
+
+Description=gunicorn socket
+
+[Socket]
+
+ListenStream=/run/blog.sock
+
+[Install]
+
+WantedBy=sockets.target
+
+
+
+[Unit]
+
+Description=gunicorn daemon
+
+Requires=blog.socket
+
+After=network.target
+
+[Service]
+
+User=ubuntu
+
+Group=ubuntu
+
+WorkingDirectory=/home/ubuntu/django-new-blog
+
+ExecStart=/home/ubuntu/portfolio_env/bin/gunicorn --workers 3 --bind unix:/run/blog.sock blog.wsgi:application
+[Install]
+
+WantedBy=sockets.target
+
+
+
+
